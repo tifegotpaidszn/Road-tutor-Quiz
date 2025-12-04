@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 2px solid #333; border-radius: 10px; background-color: #f0f0f0; }
+        h1 { color: #333; }
+        a { display: inline-block; margin-top: 20px; text-decoration: none; padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Quiz Finished!</h1>
+        <p>Your score: {{ final_score }}/{{ total }}</p>
+        <a href="{{ url_for('index') }}">Try Again</a>
+    </div>
+</body>
+</html>

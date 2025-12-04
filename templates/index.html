@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RoadSense Tutor Quiz</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 20px; }
+        .container { max-width: 500px; margin: auto; border: 2px solid #333; border-radius: 10px; padding: 20px; background-color: #f0f0f0; }
+        .question { font-weight: bold; margin-bottom: 15px; }
+        .option { display: block; margin: 8px 0; }
+        button { margin-top: 15px; padding: 10px 20px; font-size: 16px; }
+        .progress { font-style: italic; margin-bottom: 10px; }
+        .hint { color: green; font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RoadSense Tutor Quiz</h1>
+        <div class="progress">Progress: {{ progress }}</div>
+        <div class="question">{{ question.sign }}</div>
+        <form method="POST">
+            {% for option in question.options %}
+            <label class="option">
+                <input type="radio" name="option" value="{{ option }}" required> {{ option }}
+            </label>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+        <div class="hint">{{ question.hint }}</div>
+    </div>
+</body>
+</html>
