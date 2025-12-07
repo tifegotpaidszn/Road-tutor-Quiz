@@ -4,29 +4,137 @@
     <meta charset="UTF-8">
     <title>RoadSense Tutor Quiz</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 20px; }
-        .container { max-width: 500px; margin: auto; border: 2px solid #333; border-radius: 10px; padding: 20px; background-color: #f0f0f0; }
-        .question { font-weight: bold; margin-bottom: 15px; }
-        .option { display: block; margin: 8px 0; }
-        button { margin-top: 15px; padding: 10px 20px; font-size: 16px; }
-        .progress { font-style: italic; margin-bottom: 10px; }
-        .hint { color: green; font-style: italic; margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px 0;
+            background-color: #fafafa;
+        }
+
+        .card {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 20px 40px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* progress box centered under title */
+        .progress-box {
+            display: inline-block;
+            padding: 6px 25px;
+            border: 2px solid #444;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* row with options on the left and sign on the right */
+        .content-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 25px;
+        }
+
+        .options-wrapper {
+            text-align: left;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .option input {
+            margin-right: 8px;
+        }
+
+        .sign-wrapper {
+            padding: 15px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            display: inline-block;
+        }
+
+        .sign-image {
+            max-width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #eaeaea;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #dddddd;
+        }
+
+        .hint-label {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .hint-text {
+            font-style: italic;
+            color: green;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="card">
         <h1>RoadSense Tutor Quiz</h1>
-        <div class="progress">Progress: {{ progress }}</div>
-        <div class="question">{{ question.sign }}</div>
+
+        <!-- progress box like in the mockup -->
+        <div class="progress-box">
+            PROGRESS:<br>{{ progress }}
+        </div>
+
+        <!-- row: options on the left, traffic sign on the right -->
         <form method="POST">
-            {% for option in question.options %}
-            <label class="option">
-                <input type="radio" name="option" value="{{ option }}" required> {{ option }}
-            </label>
-            {% endfor %}
-            <button type="submit">Submit</button>
+            <div class="content-row">
+                <div class="options-wrapper">
+                    {% for option in question.options %}
+                    <label class="option">
+                        <input type="radio" name="option" value="{{ option }}" required>
+                        {{ option }}
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div class="sign-wrapper">
+                    <img src="{{ url_for('static', filename=question.image) }}"
+                         alt="Traffic Sign" class="sign-image">
+                </div>
+            </div>
+
+            <button type="submit">Submit Answer</button>
         </form>
-        <div class="hint">{{ question.hint }}</div>
+
+        <!-- hint at the bottom -->
+        <div class="hint-label">HINT:</div>
+        <div class="hint-text">{{ question.hint }}</div>
     </div>
 </body>
 </html>
